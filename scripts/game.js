@@ -3,33 +3,10 @@
 let board = new Board();
 
 // create players
-let marian	 = new Player(73,'#e6183c','marian');
-let steven	 = new Player(51,'#13aede','steven');
+let marian	 = new Player(40,'#e6183c','marian');
+let steven	 = new Player(42,'#13aede','steven');
 
 let blocks = [];
-
-
-
-
-
-let block1 = new Block(31);
-block1.drawBlock();
-let block2 = new Block(32);
-block2.drawBlock();
-let block3 = new Block(33);
-block3.drawBlock();
-
-let block4 = new Block(40);
-block4.drawBlock();
-let block5 = new Block(42);
-block5.drawBlock();
-
-let block6 = new Block(49);
-block6.drawBlock();
-let block7 = new Block(50);
-block7.drawBlock();
-//let block8 = new Block(51);
-//block8.drawBlock();
 
 
 
