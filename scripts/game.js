@@ -1,12 +1,12 @@
 
 // create the board
-let board = new Board();
+const board = new Board();
 
 // create players
-let marian	 = new Player(40,'#e6183c','marian');
-let steven	 = new Player(42,'#13aede','steven');
+const marian	 = new Player(40,'#e6183c','marian');
+const steven	 = new Player(42,'#13aede','steven');
 
-let blocks = [];
+const blocks = [];
 
 
 
@@ -36,22 +36,18 @@ $('ul li').on('click',function(evt){
 			if(playerBlockedAPosition && (!playerIsBlocked(marian) || !playerIsBlocked(steven)) ) {
 				switchTurn(steven);
 			}
-			if (playerIsBlocked(marian) || playerIsBlocked(steven)) {
-				alert("Game ends !! winner is : " + turn);
-			}
+			checkWinner();
 		break;
 		case 'steven':
-				updatePlayerAction();
+			updatePlayerAction();
 			play(steven, selectedPos);
 			if(playerBlockedAPosition && ((!playerIsBlocked(marian) || !playerIsBlocked(steven))) ) {
 				switchTurn(marian);
 			}
-			if (playerIsBlocked(marian) || playerIsBlocked(steven)) {
-				alert("Game ends !! winner is : " + turn);
-			}
+			checkWinner();
 		break;
 		default:
-
+			alert("Game Over");
 		break;
 	}
 });
@@ -70,6 +66,23 @@ let play = (player, selectedPos) => {
 		playerBlockedAPosition = true;
 	}
 }
+
+let checkWinner = () => {
+	if(playerIsBlocked(marian)){
+		showWinner(steven);
+		turn = null;
+	}
+	if(playerIsBlocked(steven)){
+		showWinner(marian);
+		turn = null;
+	}
+}
+
+let showWinner = (winner) => {
+	$("#panel-info").html(`
+		<h2> Congratulations ${winner.name} you won! </h2> 
+	`);
+};
 
 let switchTurn = (player) => {
 	turn = player.name;
@@ -160,13 +173,8 @@ let updateScreen = (player) => {
 }
 
 let updatePlayerAction = () => {
-	let action = playerBlockedAPosition ? "moooving" : "bloooocking";
-	$('#player-action').text("");
-}
-
-
-let checkWinner = (player) => {
-	return playerIsBlocked(player) ? player : null;
+	let action = playerBlockedAPosition ? "moooving" : "blooocking";
+	$('#player-action').text(action);
 }
 
 /**
