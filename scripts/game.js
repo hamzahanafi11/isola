@@ -8,8 +8,6 @@ const steven	 = new Player(42,'#13aede','steven');
 
 const blocks = [];
 
-
-
 // init all players
 marian.init();
 steven.init();
