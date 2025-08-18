@@ -1,0 +1,16 @@
+{
+    "name": "isola-game-by-hamza-hanafi",
+    "version": "0.0.1",
+    "description": "Game developed by Hamza Hanafi",
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.15.1",
+        "express": "^4.15.2",
+        "socket.io": "^2.3.0"
+    },
+    "scripts": {
+        "start": "node server.js"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.3"
+    }
+}

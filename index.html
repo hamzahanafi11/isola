@@ -10,112 +10,29 @@
 </head>
 <body>
 	<div>
-		<div class="display-screen">
-			<h2>Welcome to this cooool game</h2>
-			<h4>Made by Hamza ..</h4>
-			<hr/>
-			<p>try to not get caught by your opponent! <br> each turn move somewhere and block a position on the board</p>
-			<hr>
-			<p id="panel-info"> Player's turn : <span id="player-icon" class="fa fa-2x fa-chess-pawn"></span>
-								<span id="player-action">moooving</span>
-			</p>
-		</div>
 		<div class="main">
-			<ul>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-				<li> <i class="fa fa-2x"></i> </li>
-			</ul>
-		</div>
-		<div class="results">
-			<h3> <!-- message goes here --> </h3>
-			<button> restart game </button>
-		</div>
+            <h3>Join a Room</h3>
+            <form id="join-room-form">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required value="Hamza"/><br><br>
+
+                <label for="roomName">Room Name:</label>
+                <input type="text" id="roomName" name="roomName" required value="game-Hanafi"/><br><br>
+
+                <button type="submit">Join Room</button>
+            </form>
+
+            <hr>
+        </div>
 	</div>
 
 
-	<script type="text/javascript" src="scripts/board.js" ></script>
-	<script type="text/javascript" src="scripts/player.js" ></script>
-	<script type="text/javascript" src="scripts/block.js" ></script>
-	<script type="text/javascript" src="scripts/game.js" ></script>
+    
+    <!-- Add this in your HTML <head> or before room.js -->
+    <script src="/socket.io/socket.io.js"></script>
+
+
+    <script type="text/javascript" src="scripts/room.js" ></script>
 
 
 </body>

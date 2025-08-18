@@ -1,10 +1,18 @@
 
+const socket = io();
+const params = new URLSearchParams(window.location.search);
+const username = params.get('username');
+const roomName = params.get('roomName');
+socket.emit('join', roomName, username);
+console.log(username, "joined room :", roomName);
+
+
 // create the board
 const board = new Board();
 
 // create players
-const marian	 = new Player(40,'#e6183c','marian');
-const steven	 = new Player(42,'#13aede','steven');
+const marian	 = new Player(40,'#e6183c', null);
+const steven	 = new Player(42,'#13aede', null);
 
 const blocks = [];
 
@@ -16,7 +24,7 @@ steven.init();
 board.init();
 
 // game params
-let turn = marian.name;
+let turn = null;
 let playerBlockedAPosition = false;
 let playerMadeAMove = false;
 let winner = null;
@@ -24,24 +32,63 @@ let winner = null;
 
 //initDisplayScreen();
 
+socket.on('fullRoom', (room) => {
+	alert('You cannot join this room!', roomName, 'is already full');
+});
+
+socket.on('marianJoining', (username) => {
+	marian.name = username;
+	turn = marian.name;
+});
+
+socket.on('stevenJoining', (username) => {
+	steven.name = username;
+});
+
+socket.on('move', (data) => {
+	const player_ = marian.name === data.playerName ? marian : steven;
+	player_.moveTo(data.playedPosition);
+	playerMadeAMove = true;
+	updateScreen();
+	checkWinner();	
+});
+
+socket.on('block', (data) => {
+	const block = new Block(data.blockedPos);
+	block.drawBlock();
+	blocks.push(block);
+	updateScreen();
+	checkWinner();
+});
+
+socket.on('switchTurn', (data) => {
+	turn = data.turn;
+	playerMadeAMove = false;
+	updateScreen();
+});
+
+
 // playing and switching turns
 $('ul li').on('click',function(evt){
+	if(turn !== username) {
+		return;
+	}
 	let selectedPos = $(this).index() + 1;
 	switch(turn){
-		case 'marian':
-			updatePlayerAction();
+		case marian.name:
 			play(marian, selectedPos);
 			if(playerBlockedAPosition && (!playerIsBlocked(marian) || !playerIsBlocked(steven)) ) {
 				switchTurn(steven);
 			}
+			updatePlayerAction();
 			checkWinner();
 		break;
-		case 'steven':
-			updatePlayerAction();
+		case steven.name:
 			play(steven, selectedPos);
 			if(playerBlockedAPosition && ((!playerIsBlocked(marian) || !playerIsBlocked(steven))) ) {
 				switchTurn(marian);
 			}
+			updatePlayerAction();
 			checkWinner();
 		break;
 		default:
@@ -56,12 +103,25 @@ let play = (player, selectedPos) => {
 			return;// TODO : show a message that says the position is not valid 
 		player.moveTo(selectedPos);
 		playerMadeAMove = true;
+		socket.emit('move', {
+			roomName : roomName,
+			game: {
+				playerName: player.name,
+				playedPosition: player.pos
+			}
+		});
 	}
 	else if(!playerBlockedAPosition && isValidPositionToBlock(selectedPos)){
 		let block = new Block(selectedPos);
 		block.drawBlock();
 		blocks.push(block);
 		playerBlockedAPosition = true;
+		socket.emit('block', {
+			roomName : roomName,
+			game: {
+				blockedPos: selectedPos,
+			}
+		});
 	}
 }
 
@@ -84,9 +144,15 @@ let showWinner = (winner) => {
 
 let switchTurn = (player) => {
 	turn = player.name;
-	updateScreen(player);
+	updateScreen();
 	playerBlockedAPosition = false;
 	playerMadeAMove = false;
+	socket.emit('switchTurn', {
+		roomName : roomName,
+		game: {
+			turn: turn,
+		}
+	});
 }
 
 let isValidPositionForMove = (player, newPos) => {
@@ -165,13 +231,14 @@ let isNearPlace = (player, newPos) => {
 }
 
 
-let updateScreen = (player) => {
+let updateScreen = () => {
+	const player = marian.name === turn ? marian : steven;
 	$('#player-icon').attr("style","color:" + player.color);
 	updatePlayerAction();
 }
 
 let updatePlayerAction = () => {
-	let action = playerBlockedAPosition ? "moooving" : "blooocking";
+	let action = playerMadeAMove ? "blooocking" : "moooving";
 	$('#player-action').text(action);
 }
 
