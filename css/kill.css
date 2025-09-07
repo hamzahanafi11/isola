@@ -1,0 +1,22 @@
+.main {
+    width: 510px;
+    margin: auto;
+}
+
+table {
+    width: 60%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    text-align: center;
+}
+
+th {
+    background: #f4f4f4;
+}
